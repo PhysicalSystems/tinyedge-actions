@@ -1,0 +1,77 @@
+name: Decide edge deployment
+
+# One-click demo of TinyEdge's decide-in-CI: sweep a model's quantization ladder
+# on a real edge device, pick the best deployable variant, and emit a signed
+# deployment manifest — failing the build if nothing fits the profile.
+#
+# Run it from the Actions tab → "Decide edge deployment" → "Run workflow".
+# (Also runs automatically if you commit a model under models/ — see the `push`
+# trigger below; commented out by default so the demo is click-to-run.)
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Model to optimize (a GGUF repo, or hf:owner/repo)"
+        default: "hf:bartowski/Llama-3.2-1B-Instruct-GGUF"
+        required: true
+      profile:
+        description: "Deployment profile (objective + constraints)"
+        type: choice
+        options: [max_quality, cheapest_viable, realtime, battery]
+        default: max_quality
+      device:
+        description: "Device id to sweep on (must be online)"
+        default: jetson-orin-nano
+        required: true
+      quants:
+        description: "Quant ladder (comma-separated). Keep it small for a fast demo."
+        default: "q8_0,q4_k_m"
+  # push:
+  #   paths: ['models/**']     # uncomment to gate real model changes in your repo
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    steps:
+      - id: decide
+        uses: TinyEdgeAI/tinyedge-actions/decide@v1
+        with:
+          api-key: ${{ secrets.TINYEDGE_API_KEY }}
+          model: ${{ inputs.model }}
+          device: ${{ inputs.device }}
+          profile: ${{ inputs.profile }}
+          quants: ${{ inputs.quants }}
+          dataset: wikitext            # built-in corpus → on-device perplexity (quality)
+          manifest-path: tinyedge-manifest.json
+
+      - name: Summarize the decision
+        if: always()
+        run: |
+          {
+            echo "## TinyEdge deployment decision"
+            echo ""
+            echo "- **Profile:** \`${{ inputs.profile }}\`  ·  **Device:** \`${{ inputs.device }}\`"
+            echo "- **Verdict:** \`${{ steps.decide.outputs.verdict }}\`"
+            gid="${{ steps.decide.outputs.group-id }}"
+            echo "- **Sweep:** [\`$gid\`](https://tinyedge.ai/dashboard/benchmarks/sweep/$gid)"
+            if [ -f tinyedge-manifest.json ]; then
+              ship=$(jq -r '.selected | "\(.quant) on \(.device)"' tinyedge-manifest.json)
+              alg=$(jq -r '.signatureAlg // "ed25519"' tinyedge-manifest.json)
+              echo "- **Ship:** \`$ship\`  (signed, $alg)"
+              echo ""
+              echo '<details><summary>signed manifest</summary>'
+              echo ""
+              echo '```json'
+              jq '{status, selected: {quant: .selected.quant, device: .selected.device, model: .selected.model}, objective, signatureAlg}' tinyedge-manifest.json
+              echo '```'
+              echo '</details>'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload signed manifest
+        if: steps.decide.outputs.verdict == 'ok'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tinyedge-manifest
+          path: tinyedge-manifest.json

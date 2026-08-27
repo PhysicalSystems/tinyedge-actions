@@ -54,7 +54,9 @@ jobs:
         with: { name: manifest, path: tinyedge-manifest.json }
 ```
 
-See a full example project at [TinyEdgeAI/edge-llm-ci-example](https://github.com/TinyEdgeAI/edge-llm-ci-example).
+See the copy-ready [manual decision workflow](examples/decide-in-ci) or the
+full scheduled validation project at
+[TinyEdgeAI/edge-llm-ci-example](https://github.com/TinyEdgeAI/edge-llm-ci-example).
 
 ## Versioning
 
