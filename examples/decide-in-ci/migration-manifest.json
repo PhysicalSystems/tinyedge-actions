@@ -3,6 +3,7 @@
   "issue": "TIN-369",
   "migrated_on": "2026-08-27",
   "legacy_root": "tinyedge-decide-demo",
+  "text_normalization": "lf",
   "files": [
     {
       "legacy_path": "README.md",

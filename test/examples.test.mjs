@@ -18,13 +18,18 @@ test('migrated example reconstructs the exact legacy files', async () => {
   );
 
   assert.equal(manifest.issue, 'TIN-369');
+  assert.equal(manifest.text_normalization, 'lf');
   assert.equal(manifest.files.length, 3);
 
   for (const spec of manifest.files) {
-    const canonical = await readFile(path.join(ROOT, spec.canonical_path));
-    assert.equal(sha256(canonical), spec.canonical_sha256);
+    // Git stores these text files with LF. Normalize the Windows working-tree
+    // representation before comparing content hashes and reconstructing source.
+    const canonical = (
+      await readFile(path.join(ROOT, spec.canonical_path), 'utf8')
+    ).replaceAll('\r\n', '\n');
+    assert.equal(sha256(Buffer.from(canonical)), spec.canonical_sha256);
 
-    let legacy = canonical.toString('utf8');
+    let legacy = canonical;
     for (const replacement of spec.reverse_text_replacements) {
       assert.ok(legacy.includes(replacement.canonical));
       legacy = legacy.replaceAll(replacement.canonical, replacement.legacy);
