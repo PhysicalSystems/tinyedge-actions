@@ -1,0 +1,8 @@
+# TinyEdge build artifacts
+tinyedge-manifest.json
+*.gguf
+
+# Python
+__pycache__/
+*.pyc
+.venv/

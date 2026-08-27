@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "issue": "TIN-369",
+  "migrated_on": "2026-08-27",
+  "legacy_root": "tinyedge-decide-demo",
+  "files": [
+    {
+      "legacy_path": "README.md",
+      "canonical_path": "examples/decide-in-ci/README.md",
+      "legacy_sha256": "6236af641966da921b443f65927357f062ebe2d9368a5e3586a2fa08d8cc220e",
+      "canonical_sha256": "81b0b09ec954683f9e6c1e07e0418b4bd3b142d1c3a4b104419748e6229eef83",
+      "reverse_text_replacements": [
+        {
+          "canonical": "Maintainers can verify its migration integrity and live action references with\n`node --test test/examples.test.mjs` from the repository root.\n\n",
+          "legacy": ""
+        },
+        {
+          "canonical": "This directory is a copy-ready workflow template maintained with the published TinyEdge Actions. Copy `decide.yml` into your repository as `.github/workflows/decide.yml`; it is not registered as a workflow in this repository, so it cannot accidentally schedule physical hardware.\n\n",
+          "legacy": "[![Decide edge deployment](https://github.com/REPLACE_ME/tinyedge-decide-demo/actions/workflows/decide.yml/badge.svg)](../../actions/workflows/decide.yml)\n\n"
+        },
+        {
+          "canonical": "1. Copy [`decide.yml`](decide.yml) to `.github/workflows/decide.yml` in your repository.\n2. Add a repo secret",
+          "legacy": "1. **Fork** this repo (or use it as a template).\n2. Add a repo secret"
+        },
+        {
+          "canonical": "TinyEdgeAI/tinyedge-actions/decide@v1",
+          "legacy": "TinyEdgeAI/tinyedge-agent/actions/decide@v1"
+        },
+        {
+          "canonical": "https://github.com/TinyEdgeAI/tinyedge-actions/tree/v1/validate",
+          "legacy": "https://github.com/TinyEdgeAI/tinyedge-agent/tree/v1/actions/validate"
+        },
+        {
+          "canonical": "This template is a thin workflow around",
+          "legacy": "This repo is just a thin workflow around"
+        }
+      ]
+    },
+    {
+      "legacy_path": ".github/workflows/decide.yml",
+      "canonical_path": "examples/decide-in-ci/decide.yml",
+      "legacy_sha256": "19e4b34d656794987e45aedee7ff0ccb36161ab6556cc530f69a00fa85ff9c5c",
+      "canonical_sha256": "ee765566b503a0553dab4627767b2351e246c3a3a02049e6d256c5723733c4c2",
+      "reverse_text_replacements": [
+        {
+          "canonical": "TinyEdgeAI/tinyedge-actions/decide@v1",
+          "legacy": "TinyEdgeAI/tinyedge-agent/actions/decide@v1"
+        }
+      ]
+    },
+    {
+      "legacy_path": ".gitignore",
+      "canonical_path": "examples/decide-in-ci/.gitignore",
+      "legacy_sha256": "652ff98bff6191a70c1da2b9eca8e0de1f4fd67e58157a6f2b9caebda58e8e66",
+      "canonical_sha256": "652ff98bff6191a70c1da2b9eca8e0de1f4fd67e58157a6f2b9caebda58e8e66",
+      "reverse_text_replacements": []
+    }
+  ]
+}
