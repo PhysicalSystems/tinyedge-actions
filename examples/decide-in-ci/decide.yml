@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: decide
-        uses: TinyEdgeAI/tinyedge-actions/decide@v1
+        uses: PhysicalSystems/tinyedge-actions/decide@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: ${{ inputs.model }}

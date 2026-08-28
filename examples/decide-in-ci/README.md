@@ -67,7 +67,7 @@ jobs:
   decide:
     runs-on: ubuntu-latest
     steps:
-      - uses: TinyEdgeAI/tinyedge-actions/decide@v1
+      - uses: PhysicalSystems/tinyedge-actions/decide@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: models/your-model-f16.gguf
@@ -78,7 +78,7 @@ jobs:
         with: { name: manifest, path: tinyedge-manifest.json }
 ```
 
-Want just a **regression gate** against a fixed baseline instead of a fresh decision? Use the sibling [`actions/validate@v1`](https://github.com/TinyEdgeAI/tinyedge-actions/tree/v1/validate) action.
+Want just a **regression gate** against a fixed baseline instead of a fresh decision? Use the sibling [`actions/validate@v1`](https://github.com/PhysicalSystems/tinyedge-actions/tree/v1/validate) action.
 
 ---
 
