@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - id: decide
-        uses: TinyEdgeAI/tinyedge-actions/decide@v1
+        uses: PhysicalSystems/tinyedge-actions/decide@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: models/llama-3.2-1b-f16.gguf

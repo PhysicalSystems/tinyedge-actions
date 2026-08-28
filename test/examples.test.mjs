@@ -43,9 +43,9 @@ test('copy-ready workflow uses the maintained action and stays inert here', asyn
   const readme = await readFile(path.join(EXAMPLE, 'README.md'), 'utf8');
   const actionReadme = await readFile(path.join(ROOT, 'decide', 'README.md'), 'utf8');
 
-  assert.match(workflow, /TinyEdgeAI\/tinyedge-actions\/decide@v1/);
+  assert.match(workflow, /PhysicalSystems\/tinyedge-actions\/decide@v1/);
   assert.doesNotMatch(workflow, /tinyedge-agent\/actions/);
-  assert.match(actionReadme, /TinyEdgeAI\/tinyedge-actions\/decide@v1/);
+  assert.match(actionReadme, /PhysicalSystems\/tinyedge-actions\/decide@v1/);
   assert.doesNotMatch(actionReadme, /tinyedge-agent\/actions/);
   assert.match(workflow, /secrets\.TINYEDGE_API_KEY/);
   assert.match(readme, /\.github\/workflows\/decide\.yml/);

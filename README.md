@@ -25,7 +25,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: TinyEdgeAI/tinyedge-actions/validate@v1
+      - uses: PhysicalSystems/tinyedge-actions/validate@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: "hf:your-org/your-model-GGUF/your-model-Q4_K_M.gguf"
@@ -43,7 +43,7 @@ jobs:
   decide:
     runs-on: ubuntu-latest
     steps:
-      - uses: TinyEdgeAI/tinyedge-actions/decide@v1
+      - uses: PhysicalSystems/tinyedge-actions/decide@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: "hf:bartowski/Llama-3.2-1B-Instruct-GGUF"
@@ -56,7 +56,7 @@ jobs:
 
 See the copy-ready [manual decision workflow](examples/decide-in-ci) or the
 full scheduled validation project at
-[TinyEdgeAI/edge-llm-ci-example](https://github.com/TinyEdgeAI/edge-llm-ci-example).
+[PhysicalSystems/edge-llm-ci-example](https://github.com/PhysicalSystems/edge-llm-ci-example).
 
 ## Versioning
 

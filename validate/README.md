@@ -22,7 +22,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: TinyEdgeAI/tinyedge-actions/validate@v1
+      - uses: PhysicalSystems/tinyedge-actions/validate@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: "hf:your-org/your-model-GGUF/your-model-Q4_K_M.gguf"
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: TinyEdgeAI/tinyedge-actions/validate@v1
+      - uses: PhysicalSystems/tinyedge-actions/validate@v1
         with:
           api-key: ${{ secrets.TINYEDGE_API_KEY }}
           model: ./models/model.gguf
